@@ -2,18 +2,18 @@ ECSE 334 - Assignment 1
 
 *Voltage Sources
 VCC0 3 0 5V
-Vl l 0 {V}
+*Vl l 0 {V}
 
 *PNP Transistors
 Q1 b b 3 QPNP
 Q2 l b 3 QPNP
 
 *Design Param - Reference resistor (4.326kohm theo.) 4.305kohm
-*Rref b 0 {R}
-Rref b 0 4.305kohm
+Rref b 0 {R}
+*Rref b 0 4.305kohm
 
 *Load resistor
-*Rl l 0 2kohm
+Rl l 0 2kohm
 
 .model QPNP	pnp (Is=1f Xti=3 Eg=1.11 Vaf=50 Bf=50 Ne=1.5 Ise=0 Ikf=80m Xtb=1.5 Br=4.977 Nc=2 Isc=0 Ikr=0 Rc=2.5 Cjc=9.728p Mjc=.5776 Vjc=.75 Fc=.5 Cje=8.063p Mje=.3677 Vje=.75 Tr=33.42n Tf=179.3p Itf=.4 Vtf=4 Xtf=6 Rb=10)
 *		National	pid=66		case=TO92
@@ -21,7 +21,7 @@ Rref b 0 4.305kohm
 
 .op
 *.tran 1u 1m
-*.step param R 4k 4.5k 10
-.step param V -5 4.8 0.1
+.step param R 4k 4.5k 10
+*.step param V -5 5 0.1
 
 .END
