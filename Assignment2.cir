@@ -1,0 +1,25 @@
+ECSE 334 - Assignment 2
+
+*Voltage Sources
+Vs+ ss 0 2.5V
+Vs- s- 0 -2.5V
+Vid g1 0 {V}
+
+*Current Sources
+Is ss s+ 0.5mA
+
+*Resistors
+Rq1 d1 s- 4kohm
+Rq2 d2 s- 4kohm
+
+*PMOS Transistors
+M1 d1 g1 s+ 1 QMOS
+M2 d2 0 s+ 1 QMOS
+
+
+.model QMOS PMOS(LEVEL=2 VTo=-0.8 Kp=4m LAMBDA=0.005)
+
+.op
+.step param V -5 5 0.1
+
+.end
