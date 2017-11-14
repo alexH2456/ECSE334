@@ -24,6 +24,6 @@ M5 Vdd i2 Vout Vout QMOS1
 .model QMOS4 PMOS (LEVEL=2 L=1u W=120u VTo=-0.7 Kp=0.06m LAMBDA=41.66667m)
 
 .op
-.ac dec 100 1 10k
+*.ac dec 100 1 10k
 
 .end
