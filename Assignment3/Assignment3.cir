@@ -1,28 +1,29 @@
 ECSE 334 - Assignment 3
 
 *Voltage Sources
-Vs g1 0 0V
-Vcc s3 0 2.5V
-Vss i1 0 -2.5V
+Vs Vs 0 AC 1
+Vdd Vdd 0 2.5
+Vss Vss 0 -2.5
 
 *Current Sources
-I1 s1 i1 200uA
-I2 op i1 0.8mA
-I3 g5 i1 300uA
+I1 i1 Vss 200u
+I2 i2 Vss 300u
+I3 Vout Vss 0.8m
 
-*PMOS Transistors
-M4 g5 d1 s3 p QMOS4
-M3 d1 d1 s3 p QMOS3
+*PMOS Transistors - connect base to source
+M3 d1 d1 Vdd Vdd QMOS3
+M4 i2 d1 Vdd Vdd QMOS4
 
-*NMOS Transistors
-M1 d1 g1 s1 n QMOS125
-M2 s3 op s1 n QMOS125
-M5 s3 g5 op n QMOS125
+*NMOS Transistors - connect base to source
+M1 d1 Vs i1 i1 QMOS1
+M2 Vdd Vout i1 i1 QMOS1
+M5 Vdd i2 Vout Vout QMOS1
 
-.model QMOS3 PMOS(LEVEL=2 L=1 W=40 VTo=-0.7 Kp=0.06m LAMBDA=0.0417)
-.model QMOS4 PMOS(LEVEL=2 L=1 W=120 VTo=-0.7 Kp=0.06m LAMBDA=0.0417)
-.model QMOS125 NMOS(LEVEL=2 L=1 W=20 VTo=0.7 Kp=0.12m LAMBDA=0.0417)
+.model QMOS1 NMOS (LEVEL=2 L=1u W=20u VTo=0.7 Kp=0.12m LAMBDA=41.66667m)
+.model QMOS3 PMOS (LEVEL=2 L=1u W=40u VTo=-0.7 Kp=0.06m LAMBDA=41.66667m)
+.model QMOS4 PMOS (LEVEL=2 L=1u W=120u VTo=-0.7 Kp=0.06m LAMBDA=41.66667m)
 
 .op
+.ac dec 100 1 10k
 
 .end
