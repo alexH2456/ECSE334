@@ -1,0 +1,29 @@
+ECSE 334 - Assignment 3
+
+*Voltage Sources
+Vs Vs 0 AC 1
+Vdd Vdd 0 2.5
+Vss Vss 0 -2.5
+
+*Current Sources
+I1 i1 Vss 200u
+I2 i2 Vss 300u
+I3 Vo Vss 0.8m
+
+*PMOS Transistors - connect base to source
+M3 d1 d1 Vdd Vdd QMOS3
+M4 i2 d1 Vdd Vdd QMOS4
+
+*NMOS Transistors - connect base to source
+M1 d1 Vs i1 i1 QMOS1
+M2 Vdd Vo i1 i1 QMOS1
+M5 Vdd i2 Vo Vo QMOS1
+
+.model QMOS1 NMOS (LEVEL=2 L=1u W=20u VTo=0.7 Kp=0.12m LAMBDA=41.66667m)
+.model QMOS3 PMOS (LEVEL=2 L=1u W=40u VTo=-0.7 Kp=0.06m LAMBDA=41.66667m)
+.model QMOS4 PMOS (LEVEL=2 L=1u W=120u VTo=-0.7 Kp=0.06m LAMBDA=41.66667m)
+
+*.op
+.ac dec 100 1 100k
+
+.end

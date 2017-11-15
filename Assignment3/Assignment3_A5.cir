@@ -1,14 +1,18 @@
 ECSE 334 - Assignment 3
 
 *Voltage Sources
-Vs Vs 0 AC 1
-Vdd Vdd 0 2.5
-Vss Vss 0 -2.5
+Vs Vs 0 0
+Vdd Vdd 0 0
+Vss Vss 0 0
+Vout out 0 AC 1
 
 *Current Sources
 I1 i1 Vss 200u
 I2 i2 Vss 300u
-I3 Vout Vss 0.8m
+I3 Vo Vss 0.8m
+
+R2 min out 4k
+R1 min 0 1k
 
 *PMOS Transistors - connect base to source
 M3 d1 d1 Vdd Vdd QMOS3
@@ -16,14 +20,28 @@ M4 i2 d1 Vdd Vdd QMOS4
 
 *NMOS Transistors - connect base to source
 M1 d1 Vs i1 i1 QMOS1
-M2 Vdd Vout i1 i1 QMOS1
-M5 Vdd i2 Vout Vout QMOS1
+M2 Vdd Vo i1 i1 QMOS1
+M5 Vdd i2 Vo Vo QMOS1
+
+X1 Vo min out OPAMP1
 
 .model QMOS1 NMOS (LEVEL=2 L=1u W=20u VTo=0.7 Kp=0.12m LAMBDA=41.66667m)
 .model QMOS3 PMOS (LEVEL=2 L=1u W=40u VTo=-0.7 Kp=0.06m LAMBDA=41.66667m)
 .model QMOS4 PMOS (LEVEL=2 L=1u W=120u VTo=-0.7 Kp=0.06m LAMBDA=41.66667m)
 
-.op
-*.ac dec 100 1 10k
+.SUBCKT OPAMP1      1   2   6
+* INPUT IMPEDANCE
+RIN     1          2          10MEG
+* DC GAIN (100K) AND POLE 1 (100HZ)
+EP1	3 0	1 2	100K
+RP1	3	4	1K
+CP1	4	0	1.5915UF
+* OUTPUT BUFFER AND RESISTANCE
+EOUT	5 0	4 0	1
+ROUT	5	6	10
+.ENDS
+
+*.op
+.ac dec 100 1 1k
 
 .end
