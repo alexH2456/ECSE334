@@ -1,12 +1,12 @@
 Assignment 4 - Class B Output Stage
 
 *Voltage Sources
-Vi i 0 SIN(0 5 10k 0 0)
+Vi i 0 5
 VCC d1 0 5
 VSS d2 0 -5
 
 *Resistors
-RL out 0 100k
+RL out 0 {R}
 
 *MOSFETS
 M1 d1 i out out QMOS1
@@ -17,4 +17,5 @@ M2 d2 i out out QMOS2
 .model QMOS2 PMOS(LEVEL=2 VTo=-0.5 Kp=2m LAMBDA=0.005)
 
 .op
+.step param R 10 100k 100
 .end
